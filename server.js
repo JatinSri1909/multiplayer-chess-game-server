@@ -2,11 +2,10 @@ const express = require('express');
 const { Server } = require("socket.io");
 const { v4: uuidV4 } = require('uuid');
 const http = require('http');
-const path = require('path');
+
 
 const app = express(); // initialize express
 
-app.use(express.static(path.join(__dirname, 'build')));
 
 const server = http.createServer(app);
 
@@ -102,8 +101,8 @@ io.on('connection', (socket) => {
   });
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get('/', (req, res) => {
+  res.json('Hello World!');
 });
 
 server.listen(port, () => {
